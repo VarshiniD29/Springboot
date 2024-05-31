@@ -19,6 +19,14 @@ const getAllEmployees = () => {
         console.log(error);
     })
 }
+const deleteEmployee = (employeeId) => {
+    EmployeeService.deleteEmployee(employeeId).then ((response) => {
+        getAllEmployees();
+    }).catch(error =>{
+        console.log(error);
+    })
+    
+}
 
   return (
     < div className='container'>
@@ -41,6 +49,11 @@ const getAllEmployees = () => {
                                 <td> {employee.firstName} </td>
                                 <td>{employee.lastName}</td>
                                 <td>{employee.emailId}</td>
+                                <td>
+                                <Link className='btn btn-info' to={`/edit-employee/${employee.id}`}> Update </Link>
+                                <button className = "btn btn-danger" onClick = {() => deleteEmployee(employee.id)}
+                                    style = {{marginLeft:"10px"}}> Delete</button>
+                                </td>
                             </tr>
                         )
                     }
